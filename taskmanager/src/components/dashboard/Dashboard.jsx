@@ -1,62 +1,60 @@
+import Form from '../form/Form'
 import './Dashboard.css'
 
 export default function Dashboard() {
 
     return (
         <>
-            <div className='flex flex-col justify-between'>
-                <h1 className="text-6xl flex pt-8 justify-center">Taskmanager</h1>
-                <div className='grid grid-cols-7 mt-16 mx-6 content-center border-2'>
-                    <div className='border-x-2'>
-                        <h2 className='text-4xl text-center'>Monday</h2>
-                        <div>
-                            <div>
-                                <h3>Task 1</h3>
-                                <p>Get the water so we make make some cake lole</p>
-                            </div>
-                            <div>
-                                <h3>Task 2</h3>
-                                <p>Get the water so we make make some cake lole</p>
-                            </div>
-                            <div>
-                                <h3>Task 3</h3>
-                                <p>Get the water so we make make some cake lole</p>
-                            </div>
-                            <div>
-                                <h3>Task 4</h3>
-                                <p>Get the water so we make make some cake lole</p>
-                            </div>
+            <div className='flex m-12 justify-center text-center'>
+                <div className='flex-1'>
+                    <div>
+                        <h2 className='text-4xl'>Backlog</h2>
+                    </div>
+                    <div className='h-auto mt-3'>
+                        <div className='my-4 mx-2 border-2 rounded-lg'>
+                            <h3>Clean Toilet</h3>
+                            <p>Priority: <b>Medium</b></p>
+                            <p>It smells really bad and My Mom is going to beat me if I dont</p>
                         </div>
-                    </div>
-                    <div className='border-x-2'>
-                        <h2 className='text-4xl text-center'>Tuesday</h2>
-                        <div>
-                            <div>
-                                <h3>Task 4</h3>
-                                <p>Get the water so we make make some cake lole</p>
-                            </div>
+
+                        <div className='my-4 mx-2 border-2 rounded-lg'>
+                            <h3>Clean Toilet</h3>
+                            <p>Priority: <b>Medium</b></p>
+                            <p>It smells really bad and My Mom is going to beat me if I dont</p>
                         </div>
-                    </div>
-                    <div className='border-x-2'>
-                        <h2 className='text-4xl text-center'>Wednesday</h2>
-                    </div>
-                    <div className='border-x-2'>
-                        <h2 className='text-4xl text-center'>Thursday</h2>
-                    </div>
-                    <div className='border-x-2'>
-                        <h2 className='text-4xl text-center'>Friday</h2>
-                    </div>
-                    <div className='border-x-2'>
-                        <h2 className='text-4xl text-center'>Saturday</h2>
-                    </div>
-                    <div className='border-x-2'>
-                        <h2 className='text-4xl text-center'>Sunday</h2>
+                        
                     </div>
                 </div>
-                <div className=''>
-                    <h2>James</h2>
+                <div className='flex-1'>
+                    <div>
+                        <h2 className='text-4xl'>To-DO</h2>
+                    </div>
+                    <div className='h-auto  mt-3'>
+                    <div className='my-4 mx-2 border-2 rounded-lg'>
+                            <h3>Clean Toilet</h3>
+                            <p>Priority: <b>Medium</b></p>
+                            <p>It smells really bad and My Mom is going to beat me if I dont</p>
+                        </div>
+                    </div>
+                </div>
+                <div className='flex-1'>
+                    <div>
+                        <h2 className='text-4xl'>In Progress</h2>
+                    </div>
+                    <div className='h-auto  mt-3'>
+
+                    </div>
+                </div>
+                <div className='flex-1'>
+                    <div>
+                        <h2 className='text-4xl'>Done</h2>
+                    </div>
+                    <div className='h-auto mt-3'>
+
+                    </div>
                 </div>
             </div>
+            <Form></Form>
         </>
     )
 };
