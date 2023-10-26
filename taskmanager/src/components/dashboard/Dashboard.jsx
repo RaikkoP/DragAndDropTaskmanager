@@ -1,12 +1,13 @@
 import Form from '../form/Form'
+import TaskContainer from '../taskContainer/TaskContainer'
 import './Dashboard.css'
 
 export default function Dashboard() {
 
     return (
         <>
-            <div className='flex m-12 justify-center text-center'>
-                <div className='flex-1'>
+            <div className='flex m-12 justify-center text-center h-[60vh]'>
+                <div className='flex-1 overflow-y-auto'>
                     <div>
                         <h2 className='text-4xl'>Backlog</h2>
                     </div>
@@ -22,10 +23,40 @@ export default function Dashboard() {
                             <p>Priority: <b>Medium</b></p>
                             <p>It smells really bad and My Mom is going to beat me if I dont</p>
                         </div>
+
+                        <div className='my-4 mx-2 border-2 rounded-lg'>
+                            <h3>Clean Toilet</h3>
+                            <p>Priority: <b>Medium</b></p>
+                            <p>It smells really bad and My Mom is going to beat me if I dont</p>
+                        </div>
+
+                        <div className='my-4 mx-2 border-2 rounded-lg'>
+                            <h3>Clean Toilet</h3>
+                            <p>Priority: <b>Medium</b></p>
+                            <p>It smells really bad and My Mom is going to beat me if I dont</p>
+                        </div>
+
+                        <div className='my-4 mx-2 border-2 rounded-lg'>
+                            <h3>Clean Toilet</h3>
+                            <p>Priority: <b>Medium</b></p>
+                            <p>It smells really bad and My Mom is going to beat me if I dont</p>
+                        </div>
+
+                        <div className='my-4 mx-2 border-2 rounded-lg'>
+                            <h3>Clean Toilet</h3>
+                            <p>Priority: <b>Medium</b></p>
+                            <p>It smells really bad and My Mom is going to beat me if I dont</p>
+                        </div>
+
+                        <div className='my-4 mx-2 border-2 rounded-lg'>
+                            <h3>Clean Toilet</h3>
+                            <p>Priority: <b>Medium</b></p>
+                            <p>It smells really bad and My Mom is going to beat me if I dont</p>
+                        </div>
                         
                     </div>
                 </div>
-                <div className='flex-1'>
+                <div className='flex-1 overflow-y-auto'>
                     <div>
                         <h2 className='text-4xl'>To-DO</h2>
                     </div>
@@ -37,7 +68,7 @@ export default function Dashboard() {
                         </div>
                     </div>
                 </div>
-                <div className='flex-1'>
+                <div className='flex-1 overflow-y-auto'>
                     <div>
                         <h2 className='text-4xl'>In Progress</h2>
                     </div>
@@ -45,7 +76,7 @@ export default function Dashboard() {
 
                     </div>
                 </div>
-                <div className='flex-1'>
+                <div className='flex-1 overflow-y-auto'>
                     <div>
                         <h2 className='text-4xl'>Done</h2>
                     </div>
@@ -54,7 +85,10 @@ export default function Dashboard() {
                     </div>
                 </div>
             </div>
-            <Form></Form>
+            <div className='flex'>
+                <Form></Form>
+                <TaskContainer></TaskContainer>
+            </div>
         </>
     )
 };
