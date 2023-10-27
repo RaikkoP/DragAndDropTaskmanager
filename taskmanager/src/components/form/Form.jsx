@@ -1,12 +1,19 @@
 import { useState } from "react";
+import { Task } from "../../class/Task";
 
-export default function Form() {
-    const [task, setTask] = useState();
-    const [priority, setPriority] = useState('low');
+export default function Form(props) {
+    const [task, setTask] = useState('');
+    const [priority, setPriority] = useState('Low');
     const [description, setDescription] = useState('');
+    const [taskList, setTaskList] = useState([]);
 
-    function onFormSubmit(e) {
-        console.log(e.target.value);
+    function onFormSubmit() {
+        console.log(task, priority, description);
+        setTaskList([...taskList, new Task(task, priority, description)]);
+        console.log(taskList);
+        setTask('');
+        setPriority('low');
+        setDescription('');
     }
     function changeTask(e) {
         setTask(e.target.value);     
@@ -29,16 +36,16 @@ export default function Form() {
             <label className="text-2xl my-2">
                 Priority:
                 <select value={priority} onChange={changePriority} className="mx-2">
-                    <option value="low">Low</option>
-                    <option value="medium">Medium</option>
-                    <option value="high">High</option>
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
                 </select>
             </label>
             <label className="text-2xl my-2"> 
                 Description:
                 <input onChange={changeDescription} value={description} className="mx-2" type="text" name="description" placeholder="Describe the task!"></input>
             </label>
-            <button onClick={onFormSubmit} className="p-5 border-2 text-2xl" type="button">Submit</button>
+            <button className="p-5 border-2 text-2xl" onClick={onFormSubmit} type="button">Submit</button>
         </form>
     )
 }

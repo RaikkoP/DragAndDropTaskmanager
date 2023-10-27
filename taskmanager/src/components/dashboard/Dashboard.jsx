@@ -1,8 +1,16 @@
+import { useState } from 'react'
 import Form from '../form/Form'
 import TaskContainer from '../taskContainer/TaskContainer'
 import './Dashboard.css'
 
 export default function Dashboard() {
+
+    const [task, setTask] = useState('');
+    const [priority, setPriority] = useState('Low');
+    const [description, setDescription] = useState('');
+    const [taskList, setTaskList] = useState([]);
+
+    
 
     return (
         <>
@@ -86,8 +94,8 @@ export default function Dashboard() {
                 </div>
             </div>
             <div className='flex'>
-                <Form></Form>
-                <TaskContainer></TaskContainer>
+                <Form ></Form>
+                <TaskContainer title={task} priority={priority} description={description}></TaskContainer>
             </div>
         </>
     )
