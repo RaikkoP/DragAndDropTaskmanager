@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Form from '../form/Form'
 import TaskContainer from '../taskContainer/TaskContainer'
 import './Dashboard.css'
@@ -10,7 +10,14 @@ export default function Dashboard() {
     const [description, setDescription] = useState('');
     const [taskList, setTaskList] = useState([]);
 
+    useEffect(() => {
+        console.log(taskList);
+    })
     
+    function onDragOver(e) {
+        console.log('Dragged over');
+        e.preventDefault();
+    }
 
     return (
         <>
@@ -76,7 +83,7 @@ export default function Dashboard() {
                         </div>
                     </div>
                 </div>
-                <div className='flex-1 overflow-y-auto'>
+                <div onDragOver={(e)=>onDragOver(e)} className='flex-1 overflow-y-auto'>
                     <div>
                         <h2 className='text-4xl'>In Progress</h2>
                     </div>
@@ -94,8 +101,8 @@ export default function Dashboard() {
                 </div>
             </div>
             <div className='flex'>
-                <Form ></Form>
-                <TaskContainer title={task} priority={priority} description={description}></TaskContainer>
+                <Form tasks={setTaskList}></Form>
+                <TaskContainer tasks={taskList}></TaskContainer>
             </div>
         </>
     )

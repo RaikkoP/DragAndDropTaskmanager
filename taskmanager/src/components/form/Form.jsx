@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Task } from "../../class/Task";
 
 export default function Form(props) {
@@ -7,25 +7,31 @@ export default function Form(props) {
     const [description, setDescription] = useState('');
     const [taskList, setTaskList] = useState([]);
 
+    useEffect(() => {
+        props.tasks(taskList);
+    }, [taskList])
+
     function onFormSubmit() {
-        console.log(task, priority, description);
         setTaskList([...taskList, new Task(task, priority, description)]);
+        props.tasks(taskList);
+        console.log(task, priority, description);
         console.log(taskList);
         setTask('');
         setPriority('low');
-        setDescription('');
+        setDescription(''); 
     }
     function changeTask(e) {
-        setTask(e.target.value);     
+        setTask(e.target.value);
+        e.preventDefault()   
     }
     function changePriority(e) {
         setPriority(e.target.value);
+        e.preventDefault()   
     }
     function changeDescription(e) {
         setDescription(e.target.value);
+        e.preventDefault()   
     }
-
-    //Peab parandama ara button submiti, et ta console.logiks seda, informatsiooni, mis on formis
 
     return (
         <form className="flex flex-col w-[25vw] my-2">
