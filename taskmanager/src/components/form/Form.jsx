@@ -34,7 +34,7 @@ export default function Form(props) {
     }
 
     return (
-        <form className="flex flex-col w-[25vw] my-2">
+        <form className="flex flex-col w-[25vw] mx-3 my-2">
             <label className="text-2xl my-2">
                 Task: 
                 <input className="mx-2" value={task} onChange={changeTask} type="text" name="name" placeholder="Do the task!"></input>
