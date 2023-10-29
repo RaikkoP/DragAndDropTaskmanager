@@ -3,6 +3,6 @@ export class Task {
         this.title = title;
         this.priority = priority;
         this.description = description;
-        this.status = 'waiting';
+        this.location = 'waiting';
     }
 }
