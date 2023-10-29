@@ -50,83 +50,35 @@ export default function Dashboard() {
     }
     console.log(taskList);
 
+    const categories = ['backlog', 'toDo', 'inProgress', 'done'];
 
-return (
-    <>
-        <div className='flex m-12 justify-center text-center h-[60vh]'>
-            <div onDragOver={(e) => onDragOver(e)} onDrop={(e) => onDrop(e, 'backlog')} className='flex-1 overflow-y-auto'>
-                <div>
-                    <h2 className='text-4xl'>Backlog</h2>
-                </div>
-                <div className='h-auto mt-3'>
-                    {taskList.length > 0 &&
-                    taskList
-                        .filter((task) => task.location === 'backlog')
-                        .map((task, index) => (
-                            <div key={index} draggable onDragStart={(e) => startDragging(e, task.title, task.priority, task.description, task.location)} className=' my-5 border-2 rounded-lg w-[320px]'>
-                                <h3 className='text-2xl'>{task.title}</h3>
-                                <p>Priority: <b>{task.priority}</b></p>
-                                <p>{task.description}</p>
-                            </div>
-                        ))}
-                </div>
+    return (
+        <>
+            <div className='flex m-12 justify-center text-center h-[60vh]'>
+                {categories.map((category) => (
+                    <div key={category} onDragOver={onDragOver} onDrop={(e) => onDrop(e, category)} className='flex-1 overflow-y-auto'>
+                        <div>
+                            <h2 className='text-4xl'>{category.charAt(0).toUpperCase() + category.slice(1)}</h2>
+                        </div>
+                        <div className='h-auto mt-3'>
+                            {taskList.length > 0 &&
+                                taskList
+                                    .filter((task) => task.location === category)
+                                    .map((task, index) => (
+                                        <div key={index} draggable onDragStart={(e) => startDragging(e, task.title, task.priority, task.description, task.location)} className='my-5 border-2 rounded-lg w-[314px] h-[96px]'>
+                                            <h3 className='text-2xl'>{task.title}</h3>
+                                            <p>Priority: <b>{task.priority}</b></p>
+                                            <p>{task.description}</p>
+                                        </div>
+                                    ))}
+                        </div>
+                    </div>
+                ))}
             </div>
-            <div onDragOver={(e) => onDragOver(e)} onDrop={(e) => onDrop(e,'toDo')} className='flex-1 overflow-y-auto'>
-                <div>
-                    <h2 className='text-4xl'>To-DO</h2>
-                </div>
-                <div className='h-auto mt-3'>
-                {taskList.length > 0 &&
-                    taskList
-                        .filter((task) => task.location === 'toDo')
-                        .map((task, index) => (
-                            <div key={index} draggable onDragStart={(e) => startDragging(e, task.title, task.priority, task.description, task.location)} className=' my-5 border-2 rounded-lg w-[320px]'>
-                                <h3 className='text-2xl'>{task.title}</h3>
-                                <p>Priority: <b>{task.priority}</b></p>
-                                <p>{task.description}</p>
-                            </div>
-                        ))}
-                </div>
+            <div className='flex'>
+                <Form onSubmit={onFormSubmit} tasks={setTaskList} />
+                <TaskContainer onDragStart={startDragging} tasks={taskList} />
             </div>
-            <div onDragOver={(e) => onDragOver(e)} onDrop={(e) => onDrop(e, 'inProgress')} className='flex-1 overflow-y-auto'>
-                <div>
-                    <h2 className='text-4xl'>In Progress</h2>
-                </div>
-                <div className='h-auto mt-3'>
-                {taskList.length > 0 &&
-                    taskList
-                        .filter((task) => task.location === 'inProgress')
-                        .map((task, index) => (
-                            <div key={index} draggable onDragStart={(e) => startDragging(e, task.title, task.priority, task.description, task.location)} className=' my-5 border-2 rounded-lg w-[320px]'>
-                                <h3 className='text-2xl'>{task.title}</h3>
-                                <p>Priority: <b>{task.priority}</b></p>
-                                <p>{task.description}</p>
-                            </div>
-                        ))}
-                </div>
-            </div>
-            <div onDragOver={(e) => onDragOver(e)} onDrop={(e) => onDrop(e, 'done')} className='flex-1 overflow-y-auto'>
-                <div>
-                    <h2 className='text-4xl'>Done</h2>
-                </div>
-                <div className='h-auto mt-3'>
-                    {taskList.length > 0 &&
-                    taskList
-                        .filter((task) => task.location === 'done')
-                        .map((task, index) => (
-                            <div key={index} draggable onDragStart={(e) => startDragging(e, task.title, task.priority, task.description, task.location)} className=' my-5 border-2 rounded-lg w-[320px]'>
-                                <h3 className='text-2xl'>{task.title}</h3>
-                                <p>Priority: <b>{task.priority}</b></p>
-                                <p>{task.description}</p>
-                            </div>
-                        ))}
-                </div>
-            </div>
-        </div>
-        <div className='flex'>
-            <Form onSubmit={onFormSubmit} tasks={setTaskList}></Form>
-            <TaskContainer onDragStart={startDragging} tasks={taskList}></TaskContainer>
-        </div>
-    </>
-)
-};
+        </>
+    );
+}
