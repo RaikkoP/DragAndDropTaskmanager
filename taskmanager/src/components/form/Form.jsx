@@ -11,15 +11,6 @@ export default function Form(props) {
         props.tasks(taskList);
     }, [taskList])
 
-    function onFormSubmit() {
-        setTaskList([...taskList, new Task(task, priority, description)]);
-        props.tasks(taskList);
-        console.log(task, priority, description);
-        console.log(taskList);
-        setTask('');
-        setPriority('low');
-        setDescription(''); 
-    }
     function changeTask(e) {
         setTask(e.target.value);
         e.preventDefault()   
@@ -51,7 +42,7 @@ export default function Form(props) {
                 Description:
                 <input onChange={changeDescription} value={description} className="mx-2" type="text" name="description" placeholder="Describe the task!"></input>
             </label>
-            <button className="p-5 border-2 text-2xl" onClick={onFormSubmit} type="button">Submit</button>
+            <button className="p-5 border-2 text-2xl" onClick={() => props.onSubmit(task, priority, description, setTask, setPriority, setDescription)} type="button">Submit</button>
         </form>
     )
 }
