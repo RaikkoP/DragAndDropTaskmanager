@@ -8,6 +8,7 @@ import { Task } from '../../class/Task';
 export default function Dashboard() {
 
     const [taskList, setTaskList] = useState([]);
+    const [error, setError] = useState([]);
 
     useEffect(() => {
         console.log(taskList);
@@ -15,6 +16,13 @@ export default function Dashboard() {
 
     function onFormSubmit(task, priority, description, setTask, setPriority, setDescription) {
         const newTask = new Task(task, priority, description);
+        if (task === ''){
+            return setError('Task cant be empty');
+        }
+        if (description === '') {
+            return setError('Description cant be empty');
+        }
+        setError('');
         setTaskList([...taskList, newTask]);
         console.log(task, priority, description);
         console.log(taskList);
@@ -76,7 +84,8 @@ export default function Dashboard() {
                 ))}
             </div>
             <div className='flex'>
-                <Form onSubmit={onFormSubmit} tasks={setTaskList} />
+                <Form onSubmit={onFormSubmit} tasks={setTaskList} />\]
+                {error}
                 <TaskContainer onDragStart={startDragging} tasks={taskList} />
             </div>
         </>
