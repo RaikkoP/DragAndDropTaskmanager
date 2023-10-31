@@ -22,6 +22,9 @@ export default function Dashboard() {
         if (description === '') {
             return setError('Description cant be empty');
         }
+        if (taskList.find((element) => element.title === task || element.title === task && element.description === description)) {
+            return setError('Duplicate task');
+        }
         setError('');
         setTaskList([...taskList, newTask]);
         console.log(task, priority, description);
@@ -45,7 +48,7 @@ export default function Dashboard() {
     function onDrop(e, newLocation) {
         e.preventDefault();
         const data = e.dataTransfer.getData('data');
-        const { title, priority, description, location } = JSON.parse(data);
+        const { title, priority, description } = JSON.parse(data);
         setTaskList((prevTaskList) => {
             const updatedTaskList = prevTaskList.map((task) => {
                 if (task.title === title && task.priority === priority && task.description === description) {
@@ -62,13 +65,23 @@ export default function Dashboard() {
 
     return (
         <>
+        {error && 
+            <div>
+                <h2 className='text-center text-red-500 text-2xl'>{error}</h2>
+            </div>
+        }
+        {!error && 
+            <div>
+                
+            </div>
+        }
             <div className='flex m-12 justify-center text-center h-[60vh]'>
                 {categories.map((category) => (
-                    <div key={category} onDragOver={onDragOver} onDrop={(e) => onDrop(e, category)} className='flex-1 overflow-y-auto'>
+                    <div key={category} onDragOver={onDragOver} onDrop={(e) => onDrop(e, category)} className='flex-1 overflow-y-auto '>
                         <div>
                             <h2 className='text-4xl'>{category.charAt(0).toUpperCase() + category.slice(1)}</h2>
                         </div>
-                        <div className='h-auto mt-3'>
+                        <div className='h-auto mt-3 flex flex-col items-center'>
                             {taskList.length > 0 &&
                                 taskList
                                     .filter((task) => task.location === category)
@@ -84,8 +97,7 @@ export default function Dashboard() {
                 ))}
             </div>
             <div className='flex'>
-                <Form onSubmit={onFormSubmit} tasks={setTaskList} />\]
-                {error}
+                <Form onSubmit={onFormSubmit} tasks={setTaskList} />
                 <TaskContainer onDragStart={startDragging} tasks={taskList} />
             </div>
         </>

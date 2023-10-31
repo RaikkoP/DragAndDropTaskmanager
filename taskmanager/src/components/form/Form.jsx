@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Task } from "../../class/Task";
 
 export default function Form(props) {
     const [task, setTask] = useState('');
