@@ -1,14 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function Form(props) {
     const [task, setTask] = useState('');
     const [priority, setPriority] = useState('Low');
     const [description, setDescription] = useState('');
-    const [taskList, setTaskList] = useState([]);
-
-    useEffect(() => {
-        props.tasks(taskList);
-    }, [taskList])
 
     function changeTask(e) {
         setTask(e.target.value);

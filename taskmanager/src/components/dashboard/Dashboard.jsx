@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
-import Form from '../form/Form'
-import TaskContainer from '../taskContainer/TaskContainer'
-import './Dashboard.css'
+import Form from '../Form/Form'
+import TaskContainer from '../TaskContainer/TaskContainer'
 import { Task } from '../../class/Task';
 
 
@@ -9,42 +8,45 @@ export default function Dashboard() {
 
     const [taskList, setTaskList] = useState([]);
     const [error, setError] = useState([]);
+    const [firstLoad, setFirstLoad] = useState(true);
+    const categories = ['backlog', 'toDo', 'inProgress', 'done'];
 
     useEffect(() => {
-        console.log(taskList);
-    })
-
-    function onFormSubmit(task, priority, description, setTask, setPriority, setDescription) {
-        const newTask = new Task(task, priority, description);
-        if (task === ''){
+        if (firstLoad) {
+          if (localStorage.getItem('taskList')) {
+            const savedTaskList = JSON.parse(localStorage.getItem('taskList'));
+            setTaskList(savedTaskList);
+          }
+          setFirstLoad(false);
+        } else {
+          localStorage.setItem('taskList', JSON.stringify(taskList));
+        }
+      }, [taskList, setTaskList, firstLoad, setFirstLoad]);
+    function onFormSubmit(title, priority, description, setTask, setPriority, setDescription) {
+        const newTask = new Task(title, priority, description);
+        if (title === ''){
             return setError('Task cant be empty');
         }
         if (description === '') {
             return setError('Description cant be empty');
         }
-        if (taskList.find((element) => element.title === task || element.title === task && element.description === description)) {
+        if (taskList.find((element) => element.title === title || element.title === title && element.description === description)) {
             return setError('Duplicate task');
         }
         setError('');
         setTaskList([...taskList, newTask]);
-        console.log(task, priority, description);
-        console.log(taskList);
         setTask('');
         setPriority('Low');
         setDescription('');
     }
-
     function onDragOver(e) {
         e.preventDefault();
     }
-
     function startDragging(e, title, priority, description, location) {
         console.log('dragstarts', title);
         const data = JSON.stringify({ title, priority, description, location });
         e.dataTransfer.setData('data', data);
     }
-
-
     function onDrop(e, newLocation) {
         e.preventDefault();
         const data = e.dataTransfer.getData('data');
@@ -59,10 +61,6 @@ export default function Dashboard() {
             return updatedTaskList;
         });
     }
-    console.log(taskList);
-
-    const categories = ['backlog', 'toDo', 'inProgress', 'done'];
-
     return (
         <>
         {error && 
